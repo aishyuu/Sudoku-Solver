@@ -28,31 +28,41 @@ def solve(board):
     for i in range(1,10):
         # Validate the position with the current number (i)
         if validate(board, i, row, column):
-            #If validated,
+            #If validated, make the current coords the number that's valid
             board[row][column] = i
 
+            #After validation, re call the solve function again to find the next empty and continue the cycle
             if solve(board):
                 return True
             
+            #If at some point, we have to go back, set the current position to empty again (0)
+            #This will continue the loop in this position and you will keep going down the numbers
             board[row][column] = 0
+    #If none are valid, we return false to the previous, which will continue to loop in that recursion step
+    return False
 
 def validate(board, num, pos_row, pos_col):
+    #Check the row
     for i in range(len(board[0])):
         if board[pos_row][i] == num and pos_col != i:
             return False
 
+    #Check the Column
     for i in range(len(board)):
         if board[i][pos_col] == num and pos_row != i:
             return False
 
+    #Find out which box its in (box 1 to 9)
     box_x = pos_col // 3
     box_y = pos_row // 3
 
+    #Check the box
     for i in range(box_y*3, box_y*3 + 3):
         for j in range(box_x*3, box_x*3 + 3):
             if board[i][j] == num and (i,j) != (pos_col, pos_row):
                 return False
     
+    #If they're all valid, return True
     return True
 
 def print_board(board):
