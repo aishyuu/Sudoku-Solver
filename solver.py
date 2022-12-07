@@ -1,21 +1,3 @@
-board = [
-    [7,8,0,4,0,0,1,2,0],
-    [6,0,0,0,7,5,0,0,9],
-    [0,0,0,6,0,1,0,7,8],
-    [0,0,7,0,4,0,2,6,0],
-    [0,0,1,0,5,0,9,3,0],
-    [9,0,4,0,6,0,0,0,5],
-    [0,7,0,3,0,0,0,1,2],
-    [1,2,0,0,0,7,4,0,0],
-    [0,4,9,2,0,6,0,0,7]
-]
-
-def main():
-    print_board(board)
-    solve(board)
-    print("___________________")
-    print_board(board)
-
 def solve(board):
     #Seach for the coords of the empty
     find = find_empty(board)
@@ -103,6 +85,3 @@ def find_empty(board):
         for column in range(len(board)):
             if board[row][column] == 0:
                 return row, column
-
-if __name__ == "__main__":
-    main()
